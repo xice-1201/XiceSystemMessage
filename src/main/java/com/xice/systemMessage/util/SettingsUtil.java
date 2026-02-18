@@ -45,7 +45,7 @@ public class SettingsUtil {
 
   public static String getDefaultSettingsString(String key) {
     if (LOGIN_MESSAGE.equals(key)) {
-      return "&a欢迎 %player% 加入服务器！";
+      return "<green>欢迎 %player% 加入服务器！";
     }
     return null;
   }
