@@ -1,6 +1,9 @@
 package com.xice.systemMessage;
 
 import com.xice.mclib.XiceMCLib;
+import com.xice.mclib.api.XiceMCLibCommandExecutor;
+import com.xice.mclib.enums.MessageEnum;
+import com.xice.mclib.exceptions.XicePluginDisabledException;
 import com.xice.mclib.plugin.XicePlugin;
 import com.xice.systemMessage.commands.XiceSystemMessageCommand;
 import com.xice.systemMessage.messages.LoginMessage;
@@ -21,13 +24,17 @@ public class XiceSystemMessage extends XicePlugin {
     // 用户登录消息定义
     LoginMessage.startUp();
     // 指令注册
-    XiceMCLib.getXiceMCLibCommandExecutor().addExecutor(SettingsUtil.SETTINGS_FILE_NAME, new XiceSystemMessageCommand());
-    LogUtil.writeLog("插件启动成功！");
+    XiceMCLibCommandExecutor commandExecutor = XiceMCLib.getXiceMCLibCommandExecutor();
+    if (commandExecutor == null) {
+      throw new XicePluginDisabledException(MessageEnum.MSG_PLUGIN_DISABLED.getContent());
+    }
+    commandExecutor.addExecutor(SettingsUtil.SETTINGS_FILE_NAME, new XiceSystemMessageCommand());
+    LogUtil.writeInfo("插件启动成功！");
   }
 
   // 当插件被关闭时
   @Override
   public void onDisable() {
-    LogUtil.writeLog("XiceSystemMessage 卸载成功！");
+    LogUtil.writeInfo("XiceSystemMessage 卸载成功！");
   }
 }

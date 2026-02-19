@@ -2,7 +2,7 @@
 
 [![版本](https://img.shields.io/github/v/release/xice-1201/XiceSystemMessage?include_prereleases&label=版本&color=orange)](https://github.com/xice-1201/XiceSystemMessage/releases)
 [![许可证](https://img.shields.io/github/license/xice-1201/XiceSystemMessage?label=许可证&color=green)](LICENSE)
-![XiceMCLib](https://img.shields.io/badge/XiceMCLib-1.0--beta-blue)
+![XiceMCLib](https://img.shields.io/badge/XiceMCLib-1.0--release-blue)
 ![Folia](https://img.shields.io/badge/Folia-支持-brightgreen)
 
 XiceSystemMessage 是**Xice玄冰**系列插件之一，用于自定义服务器系统消息（如玩家加入、离开、达成进度、死亡等）的内容及可见性。
@@ -12,7 +12,7 @@ XiceSystemMessage 是**Xice玄冰**系列插件之一，用于自定义服务器
 - **其它消息**：开发中。
 
 ## 依赖
-- **[XiceMCLib](https://github.com/xice-1201/XiceMCLib)**：1.0-beta及以上
+- **[XiceMCLib](https://github.com/xice-1201/XiceMCLib)**：1.0-release及以上
 
 ## 安装
 - **服务器安装**：[Release 列表](https://github.com/xice-1201/XiceSystemMessage/releases)（需确保完成 [XiceMCLib](https://github.com/xice-1201/XiceMCLib) 的安装）
@@ -33,9 +33,10 @@ login-message:
 ```
 - **占位符**：
 
-| 占位符 | 描述 | 示例       |
-|--------|------|----------|
-| `%player%` | 玩家名称 | `CNXice` |
+| 占位符             | 描述      | 示例                    |
+|-----------------|---------|-----------------------|
+| `%player%`      | 玩家名称    | `CNXice`              |
+| `%currentTime%` | 当前服务器时间 | `2026-01-01 00:00:00` |
 
 ## 指令
 | 指令 | 描述 | 权限 |

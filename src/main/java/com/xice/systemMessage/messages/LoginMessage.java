@@ -1,13 +1,17 @@
 package com.xice.systemMessage.messages;
 
 import com.xice.mclib.XiceMCLib;
+import com.xice.mclib.api.XiceMCLibListener;
 import com.xice.mclib.configuration.file.XiceYamlConfiguration;
 import com.xice.mclib.entity.XicePlayer;
+import com.xice.mclib.enums.MessageEnum;
 import com.xice.mclib.event.XicePlayerJoinEvent;
+import com.xice.mclib.exceptions.XicePluginDisabledException;
 import com.xice.mclib.util.XiceMiniMessageParseUtil;
 import com.xice.systemMessage.enums.MessageVisibilityEnum;
 import com.xice.systemMessage.util.SettingsUtil;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class LoginMessage {
   private static boolean started = false;
@@ -17,7 +21,11 @@ public class LoginMessage {
       return;
     }
     // 自定义登录消息
-    XiceMCLib.getXiceMCLibListener().doWhenUserLogin(xiceEvent -> {
+    XiceMCLibListener listener = XiceMCLib.getXiceMCLibListener();
+    if (listener == null) {
+      throw new XicePluginDisabledException(MessageEnum.MSG_PLUGIN_DISABLED.getContent());
+    }
+    listener.doWhenUserLogin(xiceEvent -> {
       if (!(xiceEvent instanceof XicePlayerJoinEvent xicePlayerJoinEvent)) {
         return;
       }
@@ -36,7 +44,7 @@ public class LoginMessage {
         return;
       }
       // 准备消息文本
-      String message = XiceMiniMessageParseUtil.parseSourceMessage(configuration.getString(SettingsUtil.LOGIN_MESSAGE_CONTENT_KEY, SettingsUtil.LOGIN_MESSAGE_CONTENT_VALUE), xicePlayerJoinEvent.getPlayer());
+      String message = XiceMiniMessageParseUtil.parseMessageSourcePlayer(configuration.getString(SettingsUtil.LOGIN_MESSAGE_CONTENT_KEY, SettingsUtil.LOGIN_MESSAGE_CONTENT_VALUE), xicePlayerJoinEvent.getPlayer());
       if(message.isEmpty()) {
         return;
       }
@@ -47,19 +55,22 @@ public class LoginMessage {
         return;
       }
       // 准备发送消息列表
-      List<XicePlayer> targetPlayers;
+      CompletableFuture<List<XicePlayer>> future;
       if (visibility == MessageVisibilityEnum.NEARBY) {
-        targetPlayers = player.getNearbyPlayers(configuration.getDouble(SettingsUtil.LOGIN_MESSAGE_RANGE_KEY, SettingsUtil.LOGIN_MESSAGE_RANGE_VALUE));
+        double range = configuration.getDouble(SettingsUtil.LOGIN_MESSAGE_RANGE_KEY, SettingsUtil.LOGIN_MESSAGE_RANGE_VALUE);
+        future = player.getNearbyPlayersAsync(range);
       } else if (visibility == MessageVisibilityEnum.WORLD) {
-        targetPlayers = player.getWorldPlayers();
+        future = player.getWorldPlayersAsync();
       // 默认为 global
       } else {
-        targetPlayers = player.getOnlinePlayers();
+        future = player.getOnlinePlayersAsync();
       }
       // 发送消息
-      for (XicePlayer target : targetPlayers) {
-        target.sendMessage(message);
-      }
+      future.thenAccept(targetPlayers -> {
+        for (XicePlayer target : targetPlayers) {
+          target.sendMessage(message);
+        }
+      });
     });
     started = true;
   }
