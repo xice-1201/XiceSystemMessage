@@ -12,7 +12,7 @@ XiceSystemMessage 是**Xice玄冰**系列插件之一，用于自定义服务器
 - **其它消息**：开发中。
 
 ## 依赖
-- **[XiceMCLib](https://github.com/xice-1201/XiceMCLib)**：1.0-alpha及以上
+- **[XiceMCLib](https://github.com/xice-1201/XiceMCLib)**：1.0-beta及以上
 
 ## 安装
 - **服务器安装**：[Release 列表](https://github.com/xice-1201/XiceSystemMessage/releases)（需确保完成 [XiceMCLib](https://github.com/xice-1201/XiceMCLib) 的安装）
@@ -21,8 +21,11 @@ XiceSystemMessage 是**Xice玄冰**系列插件之一，用于自定义服务器
 ## 配置
 - **配置文件位置**：plugins/xice/systemMessage.yml（若不存在，插件会自动生成一份默认配置）
 ```yaml
-login-message: "<green>欢迎 %player% 加入服务器！" # 玩家登录服务器时发送消息（支持 MiniMessage 格式与占位符）
-login-message-range: 10.0 # 玩家登录消息可见范围（<0不可见；=0仅自己可见；>0为可见半径格数）
+login-message:
+  enable: false # 是否启用自定义玩家登录消息
+  visibility: global # 可见范围（disable：不可见；self：仅自己；nearby：附近玩家；world：当前维度；global：全服务器）
+  content: "<green>欢迎 %player% 加入服务器！" # 玩家登录服务器时发送消息（支持 MiniMessage 格式与占位符）
+  range: 10.0 # 若 visibility 为 nearby，设置玩家登录消息可见范围（单位：格）
 ```
 - **占位符**：
 

@@ -5,7 +5,7 @@
   <!-- 插件基本信息 -->
   <groupId>com.xice</groupId>
   <artifactId>XiceSystemMessage</artifactId>
-  <version>1.0-alpha</version>
+  <version>1.0-beta</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.xice</groupId>
       <artifactId>XiceMCLib</artifactId>
-      <version>1.21.11-1.0-alpha</version>
+      <version>1.21.11-1.0-beta</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
