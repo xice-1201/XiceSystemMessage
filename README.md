@@ -1,6 +1,6 @@
 # XiceSystemMessage - 自定义服务器系统消息
 
-[![版本](https://img.shields.io/github/v/release/xice-1201/XiceSystemMessage?include_prereleases&label=版本&color=orange)](https://github.com/xice-1201/XiceSystemMessage/releases)
+[![版本](https://img.shields.io/badge/版本-1.1--alpha-orange)](https://github.com/xice-1201/XiceSystemMessage/releases)
 [![许可证](https://img.shields.io/github/license/xice-1201/XiceSystemMessage?label=许可证&color=green)](LICENSE)
 ![XiceMCLib](https://img.shields.io/badge/XiceMCLib-1.1--alpha-blue)
 ![Folia](https://img.shields.io/badge/Folia-支持-brightgreen)
