@@ -2,17 +2,18 @@
 
 [![版本](https://img.shields.io/github/v/release/xice-1201/XiceSystemMessage?include_prereleases&label=版本&color=orange)](https://github.com/xice-1201/XiceSystemMessage/releases)
 [![许可证](https://img.shields.io/github/license/xice-1201/XiceSystemMessage?label=许可证&color=green)](LICENSE)
-![XiceMCLib](https://img.shields.io/badge/XiceMCLib-1.0--release-blue)
+![XiceMCLib](https://img.shields.io/badge/XiceMCLib-1.1--alpha-blue)
 ![Folia](https://img.shields.io/badge/Folia-支持-brightgreen)
 
 XiceSystemMessage 是**Xice玄冰**系列插件之一，用于自定义服务器系统消息（如玩家加入、离开、达成进度、死亡等）的内容及可见性。
 
 ## 特性
-- **玩家加入**：可以修改玩家加入服务器时的文本格式，并控制消息的可见范围（隐藏、仅自己、一定范围内的玩家或全体玩家）。
+- **系统消息自定义**：可以修改游戏中部分系统消息的文本内容与格式，并控制消息的可见范围（隐藏、仅自己、一定范围内的玩家或全体玩家）。
+- **消息监听**：可自定义的消息包括玩家登录、玩家退出。
 - **其它消息**：开发中。
 
 ## 依赖
-- **[XiceMCLib](https://github.com/xice-1201/XiceMCLib)**：1.0-release及以上
+- **[XiceMCLib](https://github.com/xice-1201/XiceMCLib)**：1.1-alpha及以上
 
 ## 安装
 - **服务器安装**：[Release 列表](https://github.com/xice-1201/XiceSystemMessage/releases)（需确保完成 [XiceMCLib](https://github.com/xice-1201/XiceMCLib) 的安装）
@@ -28,7 +29,16 @@ login-message:
   visibility: global
   # 玩家登录服务器时发送消息（支持 MiniMessage 格式与占位符）
   content: "<green>欢迎 %player% 加入服务器！"
-  # 若 visibility 为 nearby，设置玩家登录消息可见范围（单位：格）
+  # 若 login-message.visibility 为 nearby，设置玩家登录消息可见范围（单位：格）
+  range: 10.0
+quit-message:
+  # 是否启用自定义玩家退出消息
+  enable: false
+  # 可见范围（disable：不可见；self：仅自己；nearby：附近玩家；world：当前维度；global：全服务器）
+  visibility: global
+  # 玩家退出服务器时发送消息（支持 MiniMessage 格式与占位符）
+  content: "<red>%player% 离开了服务器！"
+  # 若 quit-message.visibility 为 nearby，设置玩家登录消息可见范围（单位：格）
   range: 10.0
 ```
 - **占位符**：
