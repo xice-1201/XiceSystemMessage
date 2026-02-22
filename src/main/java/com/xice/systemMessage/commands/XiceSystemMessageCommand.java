@@ -20,12 +20,12 @@ public class XiceSystemMessageCommand implements XiceCommandExecutor {
     if (shutingDown) {
       sender.sendMessage(MessageEnum.MSG_PLUGIN_DISABLED.getContent());
     }
-    if (args.size() < 1) {
+    if (args.isEmpty()) {
       sender.sendMessage("缺失必需字段！");
       return true;
     }
     // xice systemMessage reload
-    if (args.get(0).equals("reload")) {
+    if (args.getFirst().equals("reload")) {
       if (!sender.hasPermission("xice.systemMessage.reload")) {
         sender.sendMessage("无权限！");
         return true;
@@ -34,7 +34,7 @@ public class XiceSystemMessageCommand implements XiceCommandExecutor {
       sender.sendMessage("重载完毕！");
       return true;
     } else {
-      sender.sendMessage("未知的指令：" + args.get(0));
+      sender.sendMessage("未知的指令：" + args.getFirst());
       return true;
     }
   }
@@ -47,7 +47,7 @@ public class XiceSystemMessageCommand implements XiceCommandExecutor {
     List<String> suggestions = null;
     if (args.size() == 1) {
       suggestions = Arrays.asList("reload");
-      suggestions.removeIf(s -> !s.startsWith(args.get(0)));
+      suggestions.removeIf(s -> !s.startsWith(args.getFirst()));
     }
     return suggestions;
   }
