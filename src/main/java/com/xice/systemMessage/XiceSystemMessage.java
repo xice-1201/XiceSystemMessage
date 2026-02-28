@@ -52,6 +52,6 @@ public class XiceSystemMessage extends XicePlugin {
     // 关闭所有监听器
     QuitMessage.end();
     LoginMessage.end();
-    LogUtil.writeInfo("XiceSystemMessage 卸载成功！");
+    LogUtil.writeInfo("插件卸载成功！");
   }
 }
