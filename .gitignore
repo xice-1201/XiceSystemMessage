@@ -33,3 +33,34 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Claude Code ###
+# Claude project configuration files
+CLAUDE.md
+.claude/
+.claude-code/
+.claude-code.json
+.claude-code-settings.json
+.claude-code-hooks.json
+.claude-code-memory.json
+.claude-code-session.json
+.claude-code-state.json
+.claude-code-cache/
+.claude-code-logs/
+.claude-code-temp/
+
+# Claude memory and session files
+**/.claude/
+**/.claude-code/
+**/.claude-code-*/
+
+# Claude temporary files
+*.claude-tmp
+*.claude-code-tmp
+*.claude-session
+*.claude-memory
+
+# Claude IDE integration files
+.claude-ide/
+.claude-ide.json
+/.idea/inspectionProfiles/Project_Default.xml
